@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="田金涛参与的 Android 内容安全审查系统：用多智能体完成安装、探索、分类和结果归档。">
+  <meta property="og:title" content="Android 内容安全审查 · 田金涛">
+  <meta property="og:description" content="针对人工审查效率低、结果不稳定的问题，用多智能体和结构化输出做 Android 应用内容审查。">
+  <meta property="og:image" content="../../assets/og.png">
+  <meta name="theme-color" content="#0a192f">
+  <title>Android 内容安全审查 · 田金涛</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../site.css">
+  <script src="../../theme.js"></script>
+  <script src="../../nav.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <main class="page" id="main">
+    <p class="kicker">项目 01 · 2026.03 — 2026.06</p>
+    <h1>Android 内容安全审查</h1>
+    <p class="meta">Agent / 后端开发 · 仓库 <a href="https://github.com/fear66six/app_explorer" target="_blank" rel="noreferrer">fear66six/app_explorer</a></p>
+
+    <h2>要解决的问题</h2>
+    <p>面向 Android 应用里的赌博、色情等不良内容审查。系统基于 OpenAI Agents SDK、大模型和 ADB，完成 APK 安装、页面遍历、功能识别、应用分类、过程记录和结果归档。</p>
+
+    <h2>我负责什么</h2>
+    <p>我设计分层 Agent 工作流，并处理两件具体的事：Qwen/Dashscope 同时启用 Tool Calling 和 JSON Schema 时工具调用失效；直接把完整 UI XML 交给模型会让上下文膨胀，执行也不稳定。</p>
+
+    <h2>关键做法</h2>
+    <ul>
+      <li>工作流分成 Coordinator、Explore、Entry Analysis 和 Classify。Function Calling 把 APK 安装、界面采集、探索、分类和报告串起来，任务状态放在共享上下文里传递。</li>
+      <li>Qwen/Dashscope 同时开 Tool Calling 和 JSON Schema 时，工具调用会失效。适配层在 LiteLLM 上先拿掉结构化约束完成函数调用，拿到工具结果后再恢复 Schema 校验。OpenAI 和 Qwen 因此走同一套返回格式。</li>
+      <li>导航识别按控件坐标分组，综合位置、控件类型、Resource ID 和标签完整度给候选打分。XML 裁成可点击元素、页面文本和统计摘要，历史工具输出也会压缩，减少无效上下文。</li>
+      <li>页面是否加载完，用 XML 里的 loading/skeleton，加上截图的灰度、黑屏比例和区域方差一起判断。没加载完就渐进等待并有限重试。模型结果再用 Pydantic、枚举、置信度阈值和错误分类卡住。每轮调用日志、失败截图和 UI XML 都留下，方便回溯。</li>
+    </ul>
+
+    <h2>结果</h2>
+    <p>一条流程可以完成 APK 安装、页面遍历、功能识别、应用分类、过程记录和结果归档。逐轮调用日志、失败截图和 UI XML 都保留，用来定位问题和回溯任务。</p>
+
+    <h2>源码里能看到什么</h2>
+    <p><a href="https://github.com/fear66six/app_explorer" target="_blank" rel="noreferrer">github.com/fear66six/app_explorer</a> 里有智能体指令、导航识别、工具实现和 FastAPI 查看层。</p>
+    <a class="more-link" href="../../#projects">返回项目列表 →</a>
+
+    <footer class="site-footer">
+      <p class="small">© <span id="year">2026</span> 田金涛 · <a href="mailto:tianjt1216@bupt.edu.cn">tianjt1216@bupt.edu.cn</a></p>
+    </footer>
+  </main>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

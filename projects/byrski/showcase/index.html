@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="初雪 ByrSki 产品画册：拼团订票、雪具匹配、管理端和优惠券。画面来自项目材料。">
+  <meta property="og:title" content="初雪产品画册 · 田金涛">
+  <meta property="og:description" content="ByrSki 的小程序和管理端画面，用来补充平台实际长什么样。">
+  <meta property="og:image" content="../../../assets/og.png">
+  <meta name="theme-color" content="#0a192f">
+  <title>初雪产品画册 · 田金涛</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../site.css">
+  <script src="../../../theme.js"></script>
+  <script src="../../../nav.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#folio">跳到画册</a>
+  <main class="site folio-wrap" id="main">
+    <p class="kicker">ByrSki · 2025.11 — 2026.02</p>
+    <h1>初雪产品画册</h1>
+    <p>这些画面来自初雪的项目材料，用来看平台实际长什么样。简历里我负责的是优惠券和多人票订单计价。</p>
+
+    <div class="folio" id="folio">
+      <div class="folio-stage" id="folio-stage" tabindex="0" role="region" aria-roledescription="翻页画册" aria-label="初雪产品画册">
+        <article class="sheet" id="folio-page"></article>
+        <article class="sheet folio-leaf" id="folio-leaf" hidden></article>
+      </div>
+      <div class="folio-bar">
+        <button type="button" id="folio-prev">上一页</button>
+        <span class="folio-count" id="folio-count" aria-live="polite"></span>
+        <button type="button" id="folio-next">下一页</button>
+      </div>
+      <div class="folio-dots" id="folio-dots" role="tablist" aria-label="画册页码"></div>
+    </div>
+
+    <p style="margin-top:28px"><a href="../">返回项目说明</a></p>
+    <footer class="site-footer">
+      <p class="small">© <span id="year">2026</span> 田金涛 · <a href="mailto:tianjt1216@bupt.edu.cn">tianjt1216@bupt.edu.cn</a></p>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    var pages = [
+      { kind: 'cover' },
+      {
+        src: '../../../assets/byrski/group.jpg', alt: '拼团订票系统的三列界面：雪场引流、评团下单、登记信息',
+        no: '01', title: '拼团订票',
+        text: '小程序把学生认证、近期活动和拼团下单放在一条路径里。下单页写的是「拼满一车，随时出发」。'
+      },
+      {
+        src: '../../../assets/byrski/gear.jpg', alt: '雪具直达雪场、护具租赁计价和雪友匹配',
+        no: '02', title: '雪具与雪友',
+        text: '租赁按天数和件数计价，也能按滑雪水平把人匹配进同一组。'
+      },
+      {
+        src: '../../../assets/byrski/buy.jpg', alt: 'ByrSki 小程序购票页，包含住宿、单双板和附加服务',
+        no: '03', title: '小程序购票',
+        text: '一张活动票里可以一起选住宿、单双板和雪镜雪服。画面上的姓名和号码是材料里的示例。'
+      },
+      {
+        src: '../../../assets/byrski/ticket.jpg', alt: '订单凭证，示例行程从北京到崇礼',
+        no: '04', title: '订单凭证',
+        text: '下单后给出出发时间、上车地点和进场凭证。这张示例订单是从北京到崇礼。'
+      },
+      {
+        src: '../../../assets/byrski/login.jpg', alt: 'ByrSki 登录页，左侧是滑雪照片',
+        no: '05', title: '登录',
+        text: '登录页用雪场照片做一半版面。邮箱已经从画面里去掉。'
+      },
+      {
+        src: '../../../assets/byrski/admin.jpg', alt: '管理端首页，包含活动发布、合作管理、活动查看和优惠券管理',
+        no: '06', title: '管理端',
+        text: '管理端从这里进入活动发布、合作雪场、活动查看、账号和优惠券。'
+      },
+      {
+        src: '../../../assets/byrski/activities.jpg', alt: '活动列表，按班车线路显示报名进度',
+        no: '07', title: '活动列表',
+        text: '每条班车线路单独列出开始、截止和报名人数。'
+      },
+      {
+        src: '../../../assets/byrski/detail.jpg', alt: '活动详情，包含票务、住宿、车辆和附加服务',
+        no: '08', title: '活动详情',
+        text: '一个活动下面挂着票务、住宿、车辆、微信群和附加服务。'
+      },
+      {
+        src: '../../../assets/byrski/resorts.jpg', alt: '合作雪场、服务区域、合作院校和上车点',
+        no: '09', title: '雪场与上车点',
+        text: '合作雪场按城市筛选。下面是服务区域、合作院校和各校上车点。'
+      },
+      {
+        src: '../../../assets/byrski/coupons.jpg', alt: '优惠券管理列表，包含固定金额、使用门槛和有效期',
+        no: '10', title: '优惠券', mine: true,
+        text: '可以新建、启用、停止和删除。固定金额、使用门槛和有效期都在这一页。这是我在简历里负责的模块。'
+      },
+      { kind: 'end' }
+    ];
+
+    var index = 0;
+    var busy = false;
+    var pageEl = document.getElementById('folio-page');
+    var leafEl = document.getElementById('folio-leaf');
+    var countEl = document.getElementById('folio-count');
+    var prevBtn = document.getElementById('folio-prev');
+    var nextBtn = document.getElementById('folio-next');
+    var dotsEl = document.getElementById('folio-dots');
+    var stage = document.getElementById('folio-stage');
+
+    function htmlFor(page) {
+      if (page.kind === 'cover') {
+        return '<div class="sheet-cover"><p class="sheet-mark">BYRSKI</p><h2>初雪</h2><p>高校滑雪活动与票务。已上线，服务约 2000 名用户。</p></div>';
+      }
+      if (page.kind === 'end') {
+        return '<div class="sheet-end"><p class="sheet-mark">SOURCE</p><h2>看实现</h2><p>画册到这里。优惠券和订单计价的说明在项目页，后端仓库是 <a href="https://github.com/ByrSki-Official/ByrSki" target="_blank" rel="noreferrer">ByrSki-Official/ByrSki</a>。</p></div>';
+      }
+      return '<div class="sheet-figure"><img src="' + page.src + '" alt="' + page.alt + '"></div>' +
+        '<div class="sheet-cap">' +
+        (page.mine ? '<span class="mine">我负责的部分</span><br>' : '') +
+        '<span class="no">' + page.no + '</span><h2>' + page.title + '</h2><p>' + page.text + '</p></div>';
+    }
+
+    function paint(el, i) { el.innerHTML = htmlFor(pages[i]); }
+
+    function update() {
+      countEl.textContent = (index + 1) + ' / ' + pages.length;
+      prevBtn.disabled = index === 0 || busy;
+      nextBtn.disabled = index === pages.length - 1 || busy;
+      dotsEl.querySelectorAll('button').forEach(function (btn, i) {
+        btn.classList.toggle('on', i === index);
+        btn.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+    }
+
+    function go(next) {
+      if (busy || next === index || next < 0 || next >= pages.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var dir = next > index ? 1 : -1;
+      if (reduce || Math.abs(next - index) > 1) {
+        index = next;
+        paint(pageEl, index);
+        update();
+        return;
+      }
+      busy = true;
+      update();
+      leafEl.hidden = false;
+      leafEl.style.transition = 'none';
+      if (dir > 0) {
+        paint(leafEl, index);
+        paint(pageEl, next);
+        leafEl.style.transform = 'rotateY(0deg)';
+      } else {
+        paint(leafEl, next);
+        leafEl.style.transform = 'rotateY(-180deg)';
+      }
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          leafEl.style.transition = 'transform .72s cubic-bezier(.45,.05,.2,1)';
+          leafEl.style.transform = dir > 0 ? 'rotateY(-180deg)' : 'rotateY(0deg)';
+        });
+      });
+      function done() {
+        leafEl.removeEventListener('transitionend', done);
+        leafEl.hidden = true;
+        leafEl.style.transition = 'none';
+        index = next;
+        paint(pageEl, index);
+        busy = false;
+        update();
+      }
+      leafEl.addEventListener('transitionend', done);
+    }
+
+    pages.forEach(function (_, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-label', '第 ' + (i + 1) + ' 页');
+      btn.addEventListener('click', function () { go(i); });
+      dotsEl.appendChild(btn);
+    });
+    paint(pageEl, 0);
+    update();
+    prevBtn.addEventListener('click', function () { go(index - 1); });
+    nextBtn.addEventListener('click', function () { go(index + 1); });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(index - 1); }
+    });
+    var startX = 0;
+    stage.addEventListener('pointerdown', function (e) { startX = e.clientX; });
+    stage.addEventListener('pointerup', function (e) {
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) < 40) return;
+      go(index + (dx < 0 ? 1 : -1));
+    });
+  </script>
+</body>
+</html>

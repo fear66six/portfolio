@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="田金涛在 ByrSki 负责优惠券模块，并接入多人票订单计价。平台服务约 2000 名用户。">
+  <meta property="og:title" content="ByrSki 票务平台 · 田金涛">
+  <meta property="og:description" content="高校滑雪活动报名与购票。优惠券覆盖领取、核销、退款返还，并接入订单计价。平台服务约 2000 名用户。">
+  <meta property="og:image" content="../../assets/og.png">
+  <meta name="theme-color" content="#0a192f">
+  <title>ByrSki 票务平台 · 田金涛</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../site.css">
+  <script src="../../theme.js"></script>
+  <script src="../../nav.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <main class="page" id="main">
+    <p class="kicker">项目 02 · 2025.11 — 2026.02</p>
+    <h1>ByrSki 票务平台</h1>
+    <p class="meta">后端开发 · 仓库 <a href="https://github.com/ByrSki-Official/ByrSki" target="_blank" rel="noreferrer">ByrSki-Official/ByrSki</a></p>
+    <div class="contact-row">
+      <a class="contact-btn contact-btn--dark" href="showcase/">翻开产品画册</a>
+    </div>
+
+    <h2>要解决的问题</h2>
+    <p>ByrSki 是面向高校滑雪活动报名和票务的线上平台，覆盖活动发布、购票订单和优惠券。优惠券要能创建、领取、按条件使用，并在退款和过期后保持状态正确。</p>
+
+    <h2>我负责什么</h2>
+    <p>我设计并实现优惠券模块，覆盖创建、启停、领取、筛选、核销、退款返还和过期处理，再把它接进多人票订单的计价。</p>
+
+    <h2>关键做法</h2>
+    <ul>
+      <li>优惠有固定金额和折扣两种。使用条件包括商品、活动模板、雪场、订单金额和参与人数。</li>
+      <li>订单计价统一算原价、优惠金额和实付金额。退款时按退款时间和优惠券有效期，把券恢复为可用，或者标成过期。</li>
+      <li>领取请求用 Redis SETNX 和 TTL 做互斥。发放记录生成安全签名，定时任务维护优惠券状态。补充了优惠券校验、订单集成和多人下单测试。</li>
+      <li>服务是 Java 17 和 Spring Boot 3，数据用 MySQL、MyBatis-Plus 和 Redis。</li>
+    </ul>
+
+    <h2>结果</h2>
+    <p>平台已真实上线，服务约 2000 名用户。</p>
+
+    <h2>源码里能看到什么</h2>
+    <p><a href="https://github.com/ByrSki-Official/ByrSki" target="_blank" rel="noreferrer">github.com/ByrSki-Official/ByrSki</a> 是票务后端仓库，能看到优惠券、订单计价和账号相关实现。</p>
+    <a class="more-link" href="../../#projects">返回项目列表 →</a>
+
+    <footer class="site-footer">
+      <p class="small">© <span id="year">2026</span> 田金涛 · <a href="mailto:tianjt1216@bupt.edu.cn">tianjt1216@bupt.edu.cn</a></p>
+    </footer>
+  </main>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

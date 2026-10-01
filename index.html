@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="田金涛，北京邮电大学计算机科学与技术本科，已保研。Java 后端与 AI Agent 开发。">
+  <meta property="og:title" content="田金涛 · Java 后端与 AI Agent 开发">
+  <meta property="og:description" content="北京邮电大学计算机科学与技术本科，已保研。作品包括内容安全审查和 ByrSki 票务平台。">
+  <meta property="og:image" content="assets/og.png">
+  <meta name="theme-color" content="#0a192f">
+  <title>田金涛 · Java 后端与 AI Agent 开发</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css">
+  <script src="theme.js"></script>
+</head>
+<body data-nav="off">
+  <a class="skip" href="#about">跳到正文</a>
+  <div class="shell">
+    <aside class="identity">
+      <img class="portrait" src="assets/portrait.jpg" width="76" height="76" alt="田金涛的证件照">
+      <h1>田金涛</h1>
+      <p class="role">Java 后端 / AI Agent 开发</p>
+      <p class="lede">北京邮电大学计算机科学与技术本科，目前大四，已保研。</p>
+      <ul class="side-nav">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#experience">经历</a></li>
+        <li><a href="#projects">项目</a></li>
+        <li><a href="#honors">荣誉</a></li>
+      </ul>
+      <div class="side-links">
+        <a href="mailto:tianjt1216@bupt.edu.cn">tianjt1216@bupt.edu.cn</a>
+        <a href="tel:+8613934772405">13934772405</a>
+        <a href="https://github.com/fear66six" target="_blank" rel="noreferrer">github.com/fear66six</a>
+      </div>
+      <button class="theme-btn" type="button" data-theme-toggle>切换主题</button>
+    </aside>
+
+    <main class="content" id="main">
+      <p class="intro-line">做 Java 后端，也做能把模型和业务流程接起来的 Agent。</p>
+
+      <section id="about">
+        <h2 class="sec-title"><span>01</span>关于</h2>
+        <p>计算机学院（国家示范性软件学院）计算机科学与技术，中共党员。2023.09 起担任团支书。英语 CET-4 510、CET-6 503。</p>
+        <div class="stats">
+          <div class="stat"><b>3.74 / 4.00</b><span>GPA</span></div>
+          <div class="stat"><b>37 / 373</b><span>综合排名</span></div>
+          <div class="stat"><b>2026.08–10</b><span>泰康在线实习</span></div>
+          <div class="stat"><b>约 2000 人</b><span>ByrSki 服务用户</span></div>
+        </div>
+        <ul class="pills" style="margin-top:18px">
+          <li>Java 17</li><li>Python</li><li>Spring Boot 3</li><li>FastAPI</li>
+          <li>MySQL</li><li>MyBatis-Plus</li><li>Redis</li><li>OpenAI Agents SDK</li>
+          <li>LiteLLM</li><li>RAG</li><li>Function Calling</li><li>Pydantic</li>
+        </ul>
+      </section>
+
+      <section id="experience">
+        <h2 class="sec-title"><span>02</span>经历</h2>
+        <article class="job">
+          <time datetime="2026-08">2026.08 — 2026.10</time>
+          <div>
+            <h3>Agent 应用工程师 · 泰康在线</h3>
+            <p>针对车险理赔历史需求分散、规则复杂、跨系统影响分析困难的问题，参与设计并落地需求全生命周期 Agent Workflow。通过 RAG、Tool Calling 和人工确认，串联需求澄清、历史检索、影响分析、文档生成、质量检查、培训生成和上线监测。</p>
+            <p>检索知识库基于 1316 篇历史需求和 51 个业务模块，用「业务模块 + 关键词」双路召回。工具接入飞书文档、需求地图和代码只读镜像。没有可靠依据的结论会进入人工确认。</p>
+            <ul class="pills"><li>RAG</li><li>Tool Calling</li><li>Agent Workflow</li></ul>
+          </div>
+        </article>
+        <article class="job">
+          <time datetime="2026-03">2026.03 — 2026.06</time>
+          <div>
+            <h3>Agent / 后端开发 · Android 内容安全审查</h3>
+            <p>面向 Android 应用里的赌博、色情等不良内容，用 OpenAI Agents SDK、大模型和 ADB 完成安装、页面遍历、功能识别、分类和归档。</p>
+            <p><a href="projects/app-explorer/">看方案</a></p>
+            <ul class="pills"><li>OpenAI Agents SDK</li><li>LiteLLM</li><li>FastAPI</li><li>ADB</li></ul>
+          </div>
+        </article>
+        <article class="job">
+          <time datetime="2025-11">2025.11 — 2026.02</time>
+          <div>
+            <h3>后端开发 · ByrSki 票务平台</h3>
+            <p>高校滑雪活动的报名、购票和优惠券平台，已上线，服务约 2000 名用户。我负责优惠券模块，并把它接进多人票订单的计价和退款。</p>
+            <p><a href="projects/byrski/">看方案</a> · <a href="projects/byrski/showcase/">翻开产品画册</a></p>
+            <ul class="pills"><li>Java 17</li><li>Spring Boot 3</li><li>MySQL</li><li>Redis</li></ul>
+          </div>
+        </article>
+      </section>
+
+      <section id="projects">
+        <h2 class="sec-title"><span>03</span>项目</h2>
+        <div class="cards">
+          <a class="project" href="projects/byrski/">
+            <img src="assets/byrski/group.jpg" alt="ByrSki 拼团订票界面">
+            <div>
+              <h3>ByrSki 初雪票务</h3>
+              <p>活动发布、购票订单和优惠券。优惠券覆盖创建、领取、核销、退款返还和过期处理。平台服务约 2000 名用户。</p>
+              <ul class="pills"><li>Spring Boot</li><li>Redis</li><li>优惠券</li></ul>
+            </div>
+          </a>
+          <a class="project" href="projects/app-explorer/">
+            <div class="ph">AGENT</div>
+            <div>
+              <h3>Android 内容安全审查</h3>
+              <p>分层 Agent 完成 APK 安装、界面探索和应用分类。处理了 Qwen 上工具调用和结构化输出冲突，以及导航识别。</p>
+              <ul class="pills"><li>LiteLLM</li><li>Pydantic</li><li>uiautomator2</li></ul>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section id="honors">
+        <h2 class="sec-title"><span>04</span>荣誉</h2>
+        <article class="honor"><h3>中国大学生计算机设计大赛 · 全国赛一等奖</h3><p>2026.03 — 2026.08</p></article>
+        <article class="honor"><h3>全国大学生电子设计竞赛 · 全国赛一等奖</h3><p>2026.07 — 2026.08</p></article>
+        <article class="honor"><h3>第十九届全国大学生软件创新大赛 · 华北区域赛二等奖</h3><p>2025.11 — 2026.05</p></article>
+        <article class="honor"><h3>国家励志奖学金</h3><p>两次</p></article>
+        <article class="honor"><h3>优秀团干部奖、优秀学生干部奖</h3><p>各两次</p></article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
